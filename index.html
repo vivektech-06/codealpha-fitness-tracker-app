@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fitness Tracker App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#maincontent">Skip to main content</a>
+    <div class="app-shell" id="appShell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <div class="brand">
+          <div class="brand-icon">F</div>
+          <div>
+            <h1>FitPulse</h1>
+            <p>Daily wellness dashboard</p>
+          </div>
+        </div>
+        <nav class="menu" role="navigation">
+          <button type="button" class="menu-item active" data-panel="dashboard" aria-pressed="true">
+            <i class="fa-solid fa-gauge-high"></i>
+            Dashboard
+          </button>
+          <button type="button" class="menu-item" data-panel="activities" aria-pressed="false">
+            <i class="fa-solid fa-list-check"></i>
+            Activity Log
+          </button>
+          <button type="button" class="menu-item" data-panel="analytics" aria-pressed="false">
+            <i class="fa-solid fa-chart-line"></i>
+            Analytics
+          </button>
+          <button type="button" class="menu-item" data-panel="goals" aria-pressed="false">
+            <i class="fa-solid fa-bullseye"></i>
+            Goals
+          </button>
+          <button type="button" class="menu-item" data-panel="tools" aria-pressed="false">
+            <i class="fa-solid fa-heart-pulse"></i>
+            Wellness Tools
+          </button>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="theme-toggle">
+            <span id="themeLabel">Light Mode</span>
+            <button id="themeSwitcher" aria-label="Toggle dark mode">
+              <i class="fa-solid fa-moon"></i>
+            </button>
+          </div>
+          <p>Built for consistency & progress.</p>
+        </div>
+      </aside>
+
+      <main class="main-content" id="maincontent">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Welcome back, athlete</p>
+            <h2>Track your progress with clarity</h2>
+          </div>
+          <div class="topbar-actions">
+            <button type="button" id="exportDataBtn">
+              <i class="fa-solid fa-file-export"></i> Export JSON
+            </button>
+            <button type="button" id="importDataBtn">
+              <i class="fa-solid fa-file-import"></i> Import JSON
+            </button>
+          </div>
+        </header>
+
+        <section class="panel" id="dashboardPanel">
+          <div class="panel-grid stats-grid">
+            <article class="stat-card">
+              <div class="stat-title">Total Steps Today</div>
+              <div class="stat-value" id="todaySteps">0</div>
+              <div class="stat-meta">
+                Goal: <span id="stepGoalValue">10000</span>
+              </div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-title">Calories Burned</div>
+              <div class="stat-value" id="todayCalories">0</div>
+              <div class="stat-meta">
+                Weekly burn: <span id="weeklyCalories">0</span>
+              </div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-title">Workout Duration</div>
+              <div class="stat-value" id="todayWorkoutMinutes">0</div>
+              <div class="stat-meta">Active minutes</div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-title">Water Intake</div>
+              <div class="stat-value" id="todayWater">0</div>
+              <div class="stat-meta">
+                Goal: <span id="waterGoalValue">8</span> glasses
+              </div>
+            </article>
+          </div>
+
+          <div class="dashboard-panels">
+            <article class="card summary-card">
+              <div class="card-header">
+                <div>
+                  <h3>Daily Progress</h3>
+                  <p>Stay consistent. Every step adds up.</p>
+                </div>
+                <span class="badge success" id="streakBadge"
+                  >Streak: 0 days</span
+                >
+              </div>
+              <div class="progress-list">
+                <div class="progress-item">
+                  <span>Step completion</span>
+                  <div class="progress-bar">
+                    <span id="stepProgressBar"></span>
+                  </div>
+                  <strong id="stepProgressLabel">0%</strong>
+                </div>
+                <div class="progress-item">
+                  <span>Calories goal</span>
+                  <div class="progress-bar">
+                    <span id="calorieProgressBar"></span>
+                  </div>
+                  <strong id="calorieProgressLabel">0%</strong>
+                </div>
+                <div class="progress-item">
+                  <span>Workout time</span>
+                  <div class="progress-bar">
+                    <span id="workoutProgressBar"></span>
+                  </div>
+                  <strong id="workoutProgressLabel">0%</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="card insights-card">
+              <div class="card-header">
+                <div>
+                  <h3>Motivation</h3>
+                  <p>Insight to help you push through today.</p>
+                </div>
+              </div>
+              <div class="quote-block" id="motivationQuote">
+                <p>Consistency beats intensity every time. Keep moving.</p>
+              </div>
+              <div class="badge-grid">
+                <div class="achievement-badge">
+                  <i class="fa-solid fa-fire"></i><span>Burner</span>
+                </div>
+                <div class="achievement-badge">
+                  <i class="fa-solid fa-water"></i><span>Hydrated</span>
+                </div>
+                <div class="achievement-badge">
+                  <i class="fa-solid fa-shoe-prints"></i
+                  ><span>Walking Champ</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel hidden" id="activitiesPanel">
+          <div class="panel-header">
+            <div>
+              <h3>Activity Log</h3>
+              <p>Record your workouts, review history, and edit entries.</p>
+            </div>
+            <button type="button" id="openActivityModal">
+              <i class="fa-solid fa-plus"></i> Add Activity
+            </button>
+          </div>
+
+          <div class="controls-row">
+            <div class="control-group">
+              <label for="searchActivity">Search</label>
+              <input
+                type="search"
+                id="searchActivity"
+                placeholder="Search by name or type"
+              />
+            </div>
+            <div class="control-group">
+              <label for="filterActivity">Filter type</label>
+              <select id="filterActivity">
+                <option value="all">All activities</option>
+                <option value="Walking">Walking</option>
+                <option value="Running">Running</option>
+                <option value="Cycling">Cycling</option>
+                <option value="Gym Workout">Gym Workout</option>
+                <option value="Yoga">Yoga</option>
+                <option value="Swimming">Swimming</option>              <option value="Football">Football</option>
+              <option value="Basketball">Basketball</option>
+              <option value="Cricket">Cricket</option>
+              <option value="Tennis">Tennis</option>
+              <option value="Dance">Dance</option>
+              <option value="Hiking">Hiking</option>
+              <option value="Badminton">Badminton</option>                <option value="Custom">Custom</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="activity-table-container">
+            <table class="activity-table" aria-label="Activity history">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Duration</th>
+                  <th>Calories</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="activityTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel hidden" id="analyticsPanel">
+          <div class="panel-header">
+            <div>
+              <h3>Analytics</h3>
+              <p>Detailed charts for your weekly performance.</p>
+            </div>
+          </div>
+          <div class="analytics-grid">
+            <article class="card chart-card">
+              <h4>Daily Steps</h4>
+              <canvas id="stepsChart" aria-label="Daily steps chart"></canvas>
+            </article>
+            <article class="card chart-card">
+              <h4>Calories Burned</h4>
+              <canvas
+                id="caloriesChart"
+                aria-label="Calories burned chart"
+              ></canvas>
+            </article>
+            <article class="card chart-card">
+              <h4>Workout Duration</h4>
+              <canvas
+                id="durationChart"
+                aria-label="Workout duration chart"
+              ></canvas>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel hidden" id="goalsPanel">
+          <div class="panel-header">
+            <div>
+              <h3>Goals</h3>
+              <p>Manage and track your fitness targets.</p>
+            </div>
+            <button type="button" id="openGoalModal">
+              <i class="fa-solid fa-bullseye"></i> Add Goal
+            </button>
+          </div>
+
+          <div class="goal-list" id="goalList"></div>
+        </section>
+
+        <section class="panel hidden" id="toolsPanel">
+          <div class="panel-header">
+            <div>
+              <h3>Wellness Tools</h3>
+              <p>Use quick tools to stay on top of your health.</p>
+            </div>
+          </div>
+          <div class="tools-grid">
+            <article class="tool-card">
+              <h4>BMI Calculator</h4>
+              <div class="tool-input-row">
+                <div>
+                  <label for="heightInput">Height (cm)</label>
+                  <input
+                    type="number"
+                    id="heightInput"
+                    min="50"
+                    max="250"
+                    value="170"
+                  />
+                </div>
+                <div>
+                  <label for="weightInput">Weight (kg)</label>
+                  <input
+                    type="number"
+                    id="weightInput"
+                    min="30"
+                    max="200"
+                    value="70"
+                  />
+                </div>
+              </div>
+              <button id="calculateBmiBtn">Calculate BMI</button>
+              <p class="tool-result" id="bmiResult">
+                Your BMI will appear here.
+              </p>
+            </article>
+
+            <article class="tool-card">
+              <h4>Water Intake</h4>
+              <div class="tool-input-row">
+                <div>
+                  <label for="waterInput">Add glasses</label>
+                  <input
+                    type="number"
+                    id="waterInput"
+                    min="1"
+                    max="10"
+                    value="1"
+                  />
+                </div>
+                <button id="addWaterBtn">Log Water</button>
+              </div>
+              <p class="tool-result">
+                <span id="waterStatus">0</span> /
+                <span id="waterGoalStatus">8</span> glasses today
+              </p>
+            </article>
+
+            <article class="tool-card">
+              <h4>Weekly Report</h4>
+              <div class="report-summary" id="weeklyReport">
+                <div><span id="reportSteps">0</span> steps</div>
+                <div><span id="reportCalories">0</span> cal</div>
+                <div><span id="reportWorkouts">0</span> sessions</div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal hidden" id="modalOverlay" aria-hidden="true">
+      <div
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <div class="modal-header">
+          <h3 id="modalTitle">Add Activity</h3>
+          <button class="icon-btn" id="closeModal" aria-label="Close modal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <form id="activityForm">
+          <div class="form-grid">
+            <label>
+              Activity Name
+              <input
+                type="text"
+                id="activityName"
+                required
+                placeholder="Morning run"
+              />
+            </label>
+            <label>
+              Activity Type
+              <select id="activityType" required>
+                <option>Walking</option>
+                <option>Running</option>
+                <option>Cycling</option>
+                <option>Gym Workout</option>
+                <option>Yoga</option>
+                <option>Swimming</option>
+                <option>Football</option>
+                <option>Basketball</option>
+                <option>Cricket</option>
+                <option>Tennis</option>
+                <option>Dance</option>
+                <option>Hiking</option>
+                <option>Badminton</option>
+                <option>Custom</option>
+              </select>
+            </label>
+            <label>
+              Duration (min)
+              <input
+                type="number"
+                id="activityDuration"
+                min="1"
+                required
+                value="30"
+              />
+            </label>
+            <label>
+              Calories Burned
+              <input
+                type="number"
+                id="activityCalories"
+                min="1"
+                required
+                value="250"
+              />
+            </label>
+            <label>
+              Date & Time
+              <input type="datetime-local" id="activityDate" required />
+            </label>
+            <label>
+              Steps Count
+              <input type="number" id="activitySteps" min="0" value="0" />
+            </label>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="secondary-btn" id="cancelModal">
+              Cancel
+            </button>
+            <button type="submit" class="primary-btn">Save Activity</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      class="toast-container"
+      id="toastContainer"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+    <button class="fab" id="mobileAddButton" aria-label="Add Activity">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
